@@ -1,0 +1,34 @@
+name: coinlive
+description: A simple flutter app showing live data of crypto coins transactions.
+
+publish_to: 'none'
+
+version: 0.0.1+0
+
+environment:
+  sdk: ">=2.13.4 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  equatable: ^2.0.3
+  flutter_bloc: ^7.0.1
+  get_it: ^7.2.0
+  http: ^0.13.3
+  intl: ^0.17.0
+  retry: ^3.1.0
+  rxdart: ^0.27.1
+  web_socket_channel: ^2.1.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  lint: ^1.5.3
+
+flutter:
+
+  uses-material-design: true
+
+  assets:
+    - assets/
