@@ -6,7 +6,6 @@ import 'package:flutter/foundation.dart' as foundation show kDebugMode;
 
 import '/core/constants/app_error_messages.dart';
 import '/core/models/custom_http_exceptions/custom_http_exceptions.dart';
-import '/core/models/websocket_models/response_models/ws_rejected_exception.dart';
 
 class ErrorHandler {
   static void catchIt({
@@ -26,11 +25,6 @@ class ErrorHandler {
       onCatch(error.message);
       if(foundation.kDebugMode){
         dev.log('[${error.runtimeType}] Response body: \n${error.responseBody}');
-      }
-    } else if (error is WSRejectedException) {
-      onCatch(error.message);
-      if (foundation.kDebugMode) {
-        dev.log('[Rejected] Message: \n${error.message}');
       }
     } else {
       onCatch(customUnknownErrorMessage ?? AppErrorMessages.unknownError);
