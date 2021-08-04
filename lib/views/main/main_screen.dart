@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get_it/get_it.dart';
 
 import '/core/constants/app_routes.dart';
@@ -27,7 +28,7 @@ class _MainScreenState extends State<MainScreen> {
 
   // ignore: avoid_void_async
   void _reestablishWSConnection() async {
-    if(isReestablishingConnection.value) return;
+    if (isReestablishingConnection.value) return;
     isReestablishingConnection.value = true;
     await GetIt.I<BaseWebsocketService>().reestablish();
     isReestablishingConnection.value = false;
@@ -46,9 +47,7 @@ class _MainScreenState extends State<MainScreen> {
             valueListenable: isReestablishingConnection,
             builder: (_, isReestablishing, icon) {
               return IconButton(
-                onPressed: isReestablishing
-                    ? null
-                    : _reestablishWSConnection,
+                onPressed: isReestablishing ? null : _reestablishWSConnection,
                 icon: icon!,
               );
             },
@@ -68,6 +67,9 @@ class _MainScreenState extends State<MainScreen> {
               decoration: const InputDecoration(
                 border: InputBorder.none,
               ),
+              inputFormatters: [
+                UpperCaseTextFormatter(),
+              ],
             ),
             OutlinedButton(
               onPressed: () => Navigator.of(context).pushNamed(
@@ -86,6 +88,18 @@ class _MainScreenState extends State<MainScreen> {
           ],
         ),
       ),
+    );
+  }
+}
+
+class UpperCaseTextFormatter extends TextInputFormatter {
+  @override
+  TextEditingValue formatEditUpdate(
+    TextEditingValue oldValue,
+    TextEditingValue newValue,
+  ) {
+    return newValue.copyWith(
+      text: newValue.text.toUpperCase(),
     );
   }
 }
