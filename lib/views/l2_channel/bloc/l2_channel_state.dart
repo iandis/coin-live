@@ -37,11 +37,25 @@ class L2ChannelUpdatedState extends L2ChannelState {
     required this.updateResponse,
   }) : super(symbol);
 
+  L2ChannelUpdatedState copyWith({
+    String? symbol,
+    WSL2Response? updateResponse,
+  }) {
+    return L2ChannelUpdatedState(
+      symbol: symbol ?? this.symbol,
+      updateResponse: updateResponse ?? this.updateResponse,
+    );
+  }
+
   @override
   List<Object> get props => [
         ...super.props,
         updateResponse,
       ];
+}
+
+class L2ChannelUnsubscribingState extends L2ChannelState {
+  const L2ChannelUnsubscribingState(String symbol) : super(symbol);
 }
 
 class L2ChannelUnsubscribedState extends L2ChannelState {
