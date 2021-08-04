@@ -5,7 +5,6 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart' show kDebugMode;
 import 'package:get_it/get_it.dart';
-import 'package:rxdart/rxdart.dart';
 
 import '/core/enums/ws_enums.dart' show WSChannel;
 import '/core/helpers/ws_msg_parser/base_ws_msg_parser.dart';
@@ -39,50 +38,6 @@ class L2ChannelBloc extends Bloc<L2ChannelEvent, L2ChannelState> {
       onError: _processWebsocketErrorEvent,
     );
   }
-
-  // bool _isNonDebounceStates(L2Transition state) {
-  //   return (state.nextState is L2ChannelUpdatedState &&
-  //           !(state.nextState as L2ChannelUpdatedState)
-  //               .updateResponse
-  //               .isUpdatedEvent) ||
-  //       state.nextState is! L2ChannelUpdatedState;
-  // }
-
-  // bool _isDebounceStates(L2Transition state) {
-  //   return !_isNonDebounceStates(state);
-  // }
-
-  // @override
-  // L2TransitionStream transformTransitions(L2TransitionStream transitions) {
-  //   final nonDebounceStates = transitions.where(_isNonDebounceStates);
-
-  //   final debounceStates = transitions.where(_isDebounceStates).debounceTime(const Duration(milliseconds: 150));
-
-  //   return nonDebounceStates.mergeWith([debounceStates]);
-  // }
-
-  // @override
-  // L2TransitionStream transformEvents(
-  //   L2Event events,
-  //   L2TransitionFn transitionFn,
-  // ) {
-  //   final nonDebounceEvents = events.where(
-  //     (event) => event is! UpdatedL2ChannelEvent,
-  //   );
-
-  //   final debouncedEvents = events
-  //       .where(
-  //         (event) => event is UpdatedL2ChannelEvent,
-  //       )
-  //       .debounceTime(
-  //         const Duration(milliseconds: 500),
-  //       );
-  //   return super.transformEvents(
-  //     nonDebounceEvents.mergeWith([debouncedEvents]),
-  //     transitionFn,
-  //   ); //.switchMap(transitionFn);
-  //   // return nonDebounceEvents.mergeWith([debouncedEvents]).switchMap(transitionFn);
-  // }
 
   @override
   L2State mapEventToState(
