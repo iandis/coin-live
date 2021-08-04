@@ -89,13 +89,6 @@ class L3ChannelBloc extends Bloc<L3ChannelEvent, L3ChannelState> {
       symbol: symbol,
     ).toJson();
     _webSocketService.add(l3ChannelSubscribeRequest);
-
-    // _l3channelSubscription = _webSocketService.listen(
-    //   (data) => _processWebsocketData(
-    //     BaseWSMessageParser().parseResponse(data as String),
-    //   ),
-    //   onError: _processWebsocketError,
-    // );
   }
 
   L3State _subscribedL3ChannelEvent(
