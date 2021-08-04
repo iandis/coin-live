@@ -32,9 +32,7 @@ class _L2ChannelScreenState extends _L2ChannelScreenProps
       width: screenWidth * 0.43,
     );
     Widget l2LoadButtonBuilder(BuildContext context, L2ChannelState state) {
-      if (state is L2ChannelInitState ||
-          state is L2ChannelRejectedState ||
-          state is L2ChannelUnsubscribedState) {
+      if (state is! L2ChannelUpdatedState) {
         return IconButton(
           padding: const EdgeInsets.fromLTRB(8, 8, 16, 8),
           onPressed: () => _l2channelBloc.add(
@@ -128,13 +126,13 @@ class _L2ChannelScreenState extends _L2ChannelScreenProps
           bloc: _l2channelBloc,
           listener: l2StateListener,
           builder: l2StateBuilder,
-          buildWhen: (prev, next) {
-            if (prev is L2ChannelUnsubscribedState &&
-                next is L2ChannelUpdatedState) {
-              return false;
-            }
-            return true;
-          },
+          // buildWhen: (prev, next) {
+          //   if ((prev is L2ChannelUnsubscribingState || prev is L2ChannelUnsubscribedState)  &&
+          //       next is L2ChannelUpdatedState) {
+          //     return false;
+          //   }
+          //   return true;
+          // },
         ),
       ),
     );

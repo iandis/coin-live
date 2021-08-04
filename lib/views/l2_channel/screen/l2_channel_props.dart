@@ -25,6 +25,7 @@ abstract class _L2ChannelScreenProps extends State<L2ChannelScreen> {
   }
 
   bool onBackPressed() {
+    if (!_scrollController.hasClients) return true;
     if (_scrollController.offset > 0.0) {
       _scrollController.animateTo(
         0,
